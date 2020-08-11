@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ModalForm from './ModalForm'
 import axios from 'axios'
 import ApiHelper from '../api/api_helper'
-import { Link } from 'react-router-dom'
 
 export default class Table extends Component {
     constructor(props) {
@@ -60,14 +59,14 @@ export default class Table extends Component {
                                     <tbody>
                                         {this.state.bookmarks.length > 0 ?
                                             this.state.bookmarks.map(bookmark => (
-                                                <tr>
+                                                <tr key={bookmark.id}>
                                                     <th>
                                                         <a href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
                                                     </th>
                                                     <td>
                                                         <div className="row">
-                                                            {bookmark.tags.split(',').map(tag => (
-                                                                <span className="badge badge-primary mr-1">{tag}</span>
+                                                            {bookmark.tags.split(',').map((tag, i) => (
+                                                                <span className="badge badge-primary mr-1" key={i}>{tag}</span>
                                                             ))}
                                                         </div>
                                                     </td>
@@ -78,7 +77,9 @@ export default class Table extends Component {
                                                         <button className="btn btn-primary btn-sm"><i className="fa fa-edit"></i> Edit</button>
                                                     </td>
                                                 </tr>
+
                                             ))
+
                                             : null
                                         }
                                     </tbody>
