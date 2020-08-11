@@ -7,6 +7,8 @@ export default class ModalForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            isDisabled: false,
+            showLoading: false,
             isSubmit: false,
             isUpdate: false,
             url: '',
@@ -53,15 +55,18 @@ export default class ModalForm extends Component {
 
     formSubmit = async e => {
         e.preventDefault()
+        await this.setState({ isDisabled: true, showLoading: true })
         const { url, image } = this.state
         if (url && url !== '' && this.state.tags.length > 0) {
             let tags = JSON.stringify(this.state.tags)
             const formData = { url, tags, image }
             console.log(formData)
-            if (!this.state.isUpdate)
-                this.initPostRequest(formData)
-            else
-                this.initPutRequest(formData)
+            if (this.state.isDisabled) {
+                if (!this.state.isUpdate)
+                    this.initPostRequest(formData)
+                else
+                    this.initPutRequest(formData)
+            }
         }
     }
 
@@ -104,6 +109,8 @@ export default class ModalForm extends Component {
 
     clearForm = () => {
         this.setState({
+            isDisabled: false,
+            showLoading: false,
             isSubmit: false,
             isUpdate: false,
             url: '',
@@ -120,6 +127,7 @@ export default class ModalForm extends Component {
                         <small className="text-primary">Url</small>
                         <input type="text" className="form-control" id="inputUrl" placeholder="URL"
                             name="url"
+                            disabled={this.state.isDisabled}
                             value={this.state.url}
                             onChange={this.changeHandler} />
                     </div>
@@ -133,22 +141,28 @@ export default class ModalForm extends Component {
                         />
                     </div>
 
-                    <div className="col form-group col-md-3">
+                    <div className="row form-group col-md-3">
                         {!this.state.isUpdate ?
                             <Fragment>
                                 <label htmlFor="inputAddress">&nbsp;</label>
-                                <button className="btn btn-sm btn-primary form-control" type="button" onClick={this.formSubmit}>
+                                <button className="btn btn-sm btn-primary form-control" type="button" onClick={this.formSubmit} disabled={this.state.isDisabled}>
                                     <i className="fa fa-bookmark"></i>&nbsp;Add Bookmark</button>
                             </Fragment> :
                             <Fragment>
-                                <button className="btn btn-sm" type="button" onClick={this.clearForm}>Clear</button>
-                                <button className="btn btn-sm btn-warning form-control" type="button" onClick={this.formSubmit}>
+                                <button className="btn btn-sm" type="button" onClick={this.clearForm} disabled={this.state.isDisabled}>Clear</button>
+                                <button className="btn btn-sm btn-warning form-control" type="button" onClick={this.formSubmit} disabled={this.state.isDisabled}>
                                     <i className="fa fa-bookmark"></i>&nbsp;Update Bookmark</button>
-
                             </Fragment>
                         }
+
                     </div>
                 </div>
+                {this.state.showLoading ?
+                    <div className="form-group text-center">
+                        <div className="spinner-border text-warning" role="status">
+                            <span className="sr-only">Loading...</span>
+                        </div>
+                    </div> : null}
             </form>
 
         )

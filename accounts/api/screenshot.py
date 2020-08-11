@@ -1,6 +1,8 @@
 from selenium import webdriver
 import base64
 from urllib.parse import urlparse
+import cloudinary
+from cloudinary import uploader
 import re
 
 
@@ -26,6 +28,10 @@ def get_screenshot(url):
         screenshot_img = driver.get_screenshot_as_png()
         # screenshot = base64.encodestring(screenshot_img)
         driver.quit()
-        return screenshot_img
+        if screenshot_img != '':
+            result_cloudinary = cloudinary.uploader.upload(screenshot_img)
+            return result_cloudinary['url']
+        else:
+            return ''
     except Exception:
         return ''

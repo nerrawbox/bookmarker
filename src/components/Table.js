@@ -94,25 +94,26 @@ export default class Table extends Component {
                                                 <tr key={bookmark.id}>
                                                     <td>
 
-                                                        <a href={bookmark.image} target="_blank" rel="noopener noreferrer">
+                                                        <a href={bookmark.image} target="_blank" rel="noopener noreferrer" className="col-md-10">
                                                             <img src={bookmark.image} className="img-thumbnail" alt={bookmark.image} />
                                                         </a>
 
                                                     </td>
                                                     <td>
-                                                        <a className="font-weight-bold" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
+                                                        <a className="font-weight-bold col-md-10 text-center" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
                                                     </td>
                                                     <td>
-                                                        <div className="row">
+                                                        <div className="row d-flex">
                                                             {JSON.parse(bookmark.tags)?.map((tag, i) => (
-                                                                <span className="badge badge-primary mr-1" key={i}>{tag}</span>
+                                                                <span className="badge badge-primary mr-1 mb-1" key={i}>{tag}</span>
                                                             ))}
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div className="row d-flex justify-content-around">
-                                                            <button className="btn btn-primary btn-sm col-md-4" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
-                                                            <button className="btn btn-danger btn-sm col-md-4" onClick={() => this.initDelete(bookmark)}><i className="fa fa-trash"></i> Del</button>
+                                                        <div className="row d-flex justify-content-center">
+                                                            <button className="btn btn-primary btn-sm" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
+                                                            <div className="mx-1"></div>
+                                                            <button className="btn btn-danger btn-sm" onClick={() => this.initDelete(bookmark)}><i className="fa fa-trash"></i> Del</button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -129,7 +130,7 @@ export default class Table extends Component {
                     </div>
                 </div>
 
-            </section>
+            </section >
         )
     }
 }
