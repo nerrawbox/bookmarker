@@ -7,11 +7,16 @@ export default class Table extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            bookmarks: []
+            bookmarks: [],
+            bookmark: null
         }
     }
 
     async componentDidMount() {
+        await this.getBookmarks()
+    }
+
+    getBookmarks = async () => {
         await axios.get(ApiHelper.base_url + 'api/bookmark/')
             .then(response => {
                 console.log('getBookmark status: ' + response.status)
@@ -35,6 +40,10 @@ export default class Table extends Component {
         return r.test(url) ? url : `https://${url}`
     }
 
+    initUpdate = (data) => {
+        this.setState({ bookmark: data })
+    }
+
     render() {
         return (
             <section className="container">
@@ -42,9 +51,14 @@ export default class Table extends Component {
                     <div className="col my-5">
                         <div className="">
                             <div className="pb-3">
-                                <button className="btn btn-outline-primary my-2 my-sm-0" type="button"
-                                    data-toggle="modal" data-target="#exampleModal">
-                                    <i className="fa fa-bookmark"></i>&nbsp;New Bookmark</button>
+                                <div className="card card-body">
+                                    <ModalForm
+                                        getBookmarks={this.getBookmarks}
+                                        updateData={this.state.bookmark}
+                                    />
+                                </div>
+                                <br />
+                                <h3>Bookmarks</h3>
                             </div>
                             <div className="card card-body">
                                 <table className="table table-hover display" id="bookmarks">
@@ -65,7 +79,7 @@ export default class Table extends Component {
                                                     </th>
                                                     <td>
                                                         <div className="row">
-                                                            {bookmark.tags.split(',').map((tag, i) => (
+                                                            {JSON.parse(bookmark.tags)?.map((tag, i) => (
                                                                 <span className="badge badge-primary mr-1" key={i}>{tag}</span>
                                                             ))}
                                                         </div>
@@ -74,7 +88,7 @@ export default class Table extends Component {
                                                         <p>{bookmark.image}</p>
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-primary btn-sm"><i className="fa fa-edit"></i> Edit</button>
+                                                        <button className="btn btn-primary btn-sm" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
                                                     </td>
                                                 </tr>
 
@@ -89,7 +103,7 @@ export default class Table extends Component {
 
                     </div>
                 </div>
-                <ModalForm />
+
             </section>
         )
     }

@@ -1,4 +1,5 @@
 from django.db import models
+from jsonfield import JSONField
 
 
 class Bookmark(models.Model):
