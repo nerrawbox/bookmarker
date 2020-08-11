@@ -100,7 +100,7 @@ export default class Table extends Component {
 
                                                     </td>
                                                     <td>
-                                                        <a className="font-weight-bold col-md-10 text-center" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
+                                                        <a className="font-weight-bold col-md-10 text-center m-auto" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
                                                     </td>
                                                     <td>
                                                         <div className="row d-flex">
@@ -110,7 +110,7 @@ export default class Table extends Component {
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div className="row d-flex justify-content-center">
+                                                        <div className="row d-flex justify-content-center m-auto">
                                                             <button className="btn btn-primary btn-sm" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
                                                             <div className="mx-1"></div>
                                                             <button className="btn btn-danger btn-sm" onClick={() => this.initDelete(bookmark)}><i className="fa fa-trash"></i> Del</button>
