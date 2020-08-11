@@ -61,11 +61,11 @@ export default class ModalForm extends Component {
             if (!this.state.isUpdate)
                 this.initPostRequest(formData)
             else
-                this.initPatchRequest(formData)
+                this.initPutRequest(formData)
         }
     }
 
-    initPatchRequest = async (formData) => {
+    initPutRequest = async (formData) => {
         let url = `${ApiHelper.base_url}api/bookmark/${this.props.updateData.id}/`
         await axios.put(url, formData)
             .then(async response => {

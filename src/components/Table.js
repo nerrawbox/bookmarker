@@ -22,7 +22,7 @@ export default class Table extends Component {
                 console.log('getBookmark status: ' + response.status)
                 if (response.status >= 200 && response.status < 400) {
                     let json = response.data
-                    if (json.length > 0) {
+                    if (json.length >= 0) {
                         console.log(json)
                         this.setState({
                             bookmarks: json,
@@ -41,7 +41,25 @@ export default class Table extends Component {
     }
 
     initUpdate = (data) => {
+        window.scrollTo(0, 0)
         this.setState({ bookmark: data })
+    }
+
+    initDelete = async (data) => {
+        let url = `${ApiHelper.base_url}api/bookmark/${data.id}/`
+        await axios.delete(url)
+            .then(async response => {
+                console.log('initDelete status: ' + response.status)
+                if (response.status >= 200 && response.status < 400) {
+                    this.getBookmarks()
+                } else {
+
+                }
+            })
+            .catch(err => {
+                alert(err)
+                console.log(err)
+            })
     }
 
     render() {
@@ -88,7 +106,10 @@ export default class Table extends Component {
                                                         <p>{bookmark.image}</p>
                                                     </td>
                                                     <td>
-                                                        <button className="btn btn-primary btn-sm" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
+                                                        <div className="row d-flex justify-content-around">
+                                                            <button className="btn btn-primary btn-sm col-md-4" onClick={() => this.initUpdate(bookmark)}><i className="fa fa-edit"></i> Edit</button>
+                                                            <button className="btn btn-danger btn-sm col-md-4" onClick={() => this.initDelete(bookmark)}><i className="fa fa-trash"></i> Del</button>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
