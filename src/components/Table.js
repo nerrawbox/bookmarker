@@ -1,7 +1,41 @@
 import React, { Component } from 'react'
 import ModalForm from './ModalForm'
+import axios from 'axios'
+import ApiHelper from '../api/api_helper'
+import { Link } from 'react-router-dom'
 
 export default class Table extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            bookmarks: []
+        }
+    }
+
+    async componentDidMount() {
+        await axios.get(ApiHelper.base_url + 'api/bookmark/')
+            .then(response => {
+                console.log('getBookmark status: ' + response.status)
+                if (response.status >= 200 && response.status < 400) {
+                    let json = response.data
+                    if (json.length > 0) {
+                        console.log(json)
+                        this.setState({
+                            bookmarks: json,
+                        })
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    parseUrl = (url) => {
+        let r = new RegExp('^(?:[a-z]+:)?//', 'i')
+        return r.test(url) ? url : `https://${url}`
+    }
+
     render() {
         return (
             <section className="container">
@@ -9,7 +43,7 @@ export default class Table extends Component {
                     <div className="col my-5">
                         <div className="">
                             <div className="pb-3">
-                                <button className="btn btn-outline-primary my-2 my-sm-0" type="button" className="btn btn-primary"
+                                <button className="btn btn-outline-primary my-2 my-sm-0" type="button"
                                     data-toggle="modal" data-target="#exampleModal">
                                     <i className="fa fa-bookmark"></i>&nbsp;New Bookmark</button>
                             </div>
@@ -24,40 +58,29 @@ export default class Table extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th>
-                                                <a href="https://www.google.com" target="_blank">www.google.com</a>
-                                            </th>
-                                            <td>
-                                                <div className="row">
-                                                    <span className="badge badge-secondary mr-1">Search</span>
-                                                    <span className="badge badge-danger mr-1">Google</span>
-                                                    <span className="badge badge-primary mr-1">Website</span>
-                                                </div>
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                            <td>
-                                                <button className="btn btn-primary btn-sm"><i className="fa fa-edit"></i> Edit</button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <th><a href="https://www.stackoverflow.com" target="_blank">www.stackoverflow.com</a>
-                                            </th>
-                                            <td>
-                                                <div className="row">
-                                                    <span className="badge badge-primary mr-1">Programming</span>
-                                                    <span className="badge badge-primary mr-1">Stackoverflow</span>
-                                                    <span className="badge badge-primary mr-1">Website</span>
-                                                </div>
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                                <button className="btn btn-primary btn-sm"><i className="fa fa-edit"></i> Edit</button>
-                                            </td>
-                                        </tr>
+                                        {this.state.bookmarks.length > 0 ?
+                                            this.state.bookmarks.map(bookmark => (
+                                                <tr>
+                                                    <th>
+                                                        <a href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
+                                                    </th>
+                                                    <td>
+                                                        <div className="row">
+                                                            {bookmark.tags.split(',').map(tag => (
+                                                                <span className="badge badge-primary mr-1">{tag}</span>
+                                                            ))}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p>{bookmark.image}</p>
+                                                    </td>
+                                                    <td>
+                                                        <button className="btn btn-primary btn-sm"><i className="fa fa-edit"></i> Edit</button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                            : null
+                                        }
                                     </tbody>
                                 </table>
                             </div>

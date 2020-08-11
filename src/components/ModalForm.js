@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class ModalForm extends Component {
     render() {
         return (
-            <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -19,13 +19,13 @@ export default class ModalForm extends Component {
                             <form>
 
                                 <div className="form-group">
-                                    <label for="inputAddress">URL</label>
+                                    <label htmlFor="inputAddress">URL</label>
                                     <input type="text" className="form-control" id="imputUrl" placeholder="URL" />
                                 </div>
 
 
                                 <div className="form-group">
-                                    <label for="inputAddress">Tags</label>
+                                    <label htmlFor="inputAddress">Tags</label>
                                     <input type="text" className="form-control" id="imputTags" name="tags" placeholder="Add Tags" />
                                 </div>
 
