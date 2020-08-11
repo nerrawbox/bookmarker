@@ -123,6 +123,14 @@ export default class Table extends Component {
                                             : null
                                         }
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th scope="col">Screenshot</th>
+                                            <th scope="col">URL</th>
+                                            <th scope="col">Tags</th>
+                                            <th scope="col">Manage</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                         </div>

@@ -35,7 +35,30 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/datatables.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    $('#bookmarks').DataTable();
+    // $('#bookmarks').DataTable();
+    $('#bookmarks tfoot th').each(function () {
+      var title = $(this).text();
+      if (title == 'Tags' || title == 'URL') {
+        $(this).html('<input class="form-control m-auto" type="text" placeholder="Search ' + title + '" />');
+      }
+    });
+
+    var table = $('#bookmarks').DataTable({
+      initComplete: function () {
+        // Apply the search
+        this.api().columns().every(function () {
+          var that = this;
+
+          $('input', this.footer()).on('keyup change clear', function () {
+            if (that.search() !== this.value) {
+              that
+                .search(this.value)
+                .draw();
+            }
+          });
+        });
+      }
+    });
   });
 
 </script>
