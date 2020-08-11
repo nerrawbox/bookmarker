@@ -93,9 +93,11 @@ export default class Table extends Component {
                                             this.state.bookmarks.map(bookmark => (
                                                 <tr key={bookmark.id}>
                                                     <td>
+
                                                         <a href={bookmark.image} target="_blank" rel="noopener noreferrer">
-                                                            <img src={bookmark.image} class="img-rounded col-md-6" alt={bookmark.image} />
+                                                            <img src={bookmark.image} className="img-thumbnail" alt={bookmark.image} />
                                                         </a>
+
                                                     </td>
                                                     <td>
                                                         <a className="font-weight-bold" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
