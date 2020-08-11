@@ -82,9 +82,9 @@ export default class Table extends Component {
                                 <table className="table table-hover display" id="bookmarks">
                                     <thead>
                                         <tr>
+                                            <th scope="col">Screenshot</th>
                                             <th scope="col">URL</th>
                                             <th scope="col">Tags</th>
-                                            <th scope="col">Screenshot</th>
                                             <th scope="col">Manage</th>
                                         </tr>
                                     </thead>
@@ -92,18 +92,20 @@ export default class Table extends Component {
                                         {this.state.bookmarks.length > 0 ?
                                             this.state.bookmarks.map(bookmark => (
                                                 <tr key={bookmark.id}>
-                                                    <th>
-                                                        <a href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
-                                                    </th>
+                                                    <td>
+                                                        <a href={bookmark.image} target="_blank" rel="noopener noreferrer">
+                                                            <img src={bookmark.image} class="img-rounded col-md-6" alt={bookmark.image} />
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <a className="font-weight-bold" href={this.parseUrl(bookmark.url)} target="_blank" rel="noopener noreferrer">{bookmark.url}</a>
+                                                    </td>
                                                     <td>
                                                         <div className="row">
                                                             {JSON.parse(bookmark.tags)?.map((tag, i) => (
                                                                 <span className="badge badge-primary mr-1" key={i}>{tag}</span>
                                                             ))}
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <p>{bookmark.image}</p>
                                                     </td>
                                                     <td>
                                                         <div className="row d-flex justify-content-around">

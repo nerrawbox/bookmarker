@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import cloudinary
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'accounts'
+    'accounts',
+    'cloudinary',
+    'selenium',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static'),
@@ -137,3 +142,12 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+cloudinary.config(
+    cloud_name="dqcfea0ze",
+    api_key="562177239136887",
+    api_secret="lF0H5MQxBtwgpXLapV2bqkGvEig",
+    secure=True
+)
+
+SELENIUM_DRIVER = 'Remote'
