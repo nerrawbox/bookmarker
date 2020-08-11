@@ -29,9 +29,11 @@ export default class Table extends Component {
                                                 <a href="https://www.google.com" target="_blank">www.google.com</a>
                                             </th>
                                             <td>
-                                                <span className="badge badge-primary">Search</span>
-                                                <span className="badge badge-primary">Google</span>
-                                                <span className="badge badge-primary">Website</span>
+                                                <div className="row">
+                                                    <span className="badge badge-secondary mr-1">Search</span>
+                                                    <span className="badge badge-danger mr-1">Google</span>
+                                                    <span className="badge badge-primary mr-1">Website</span>
+                                                </div>
                                             </td>
                                             <td>
 
@@ -45,9 +47,11 @@ export default class Table extends Component {
                                             <th><a href="https://www.stackoverflow.com" target="_blank">www.stackoverflow.com</a>
                                             </th>
                                             <td>
-                                                <span className="badge badge-primary">Programming</span>
-                                                <span className="badge badge-primary">Stackoverflow</span>
-                                                <span className="badge badge-primary">Website</span>
+                                                <div className="row">
+                                                    <span className="badge badge-primary mr-1">Programming</span>
+                                                    <span className="badge badge-primary mr-1">Stackoverflow</span>
+                                                    <span className="badge badge-primary mr-1">Website</span>
+                                                </div>
                                             </td>
                                             <td></td>
                                             <td>
