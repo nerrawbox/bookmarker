@@ -26,16 +26,19 @@ def get_screenshot(url):
         #GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
         CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
-        chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', 'chromedriver')
+        chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', "chromedriver")
 
         options = webdriver.ChromeOptions()
         options.binary_location = chrome_bin
         options.add_argument('—-no-sandbox')
+        options.add_argument('--disable-setuid-sandbox')
         options.add_argument('—-headless')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-infobars')
         options.add_argument('--disable-extensions')
+        options.add_argument('--remote-debugging-port=9222')
         options.add_argument('—-disable-gpu')
+        options.add_argument('window-size=1200x600')
 
         #DRIVER = 'chromedriver'
         #driver = webdriver.Chrome(DRIVER)
