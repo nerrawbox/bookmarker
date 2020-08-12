@@ -4,7 +4,6 @@
 
 #python
 /env
-*.sqlite3
 **/*.pyc
 
 # dependencies
