@@ -30,9 +30,12 @@ def get_screenshot(url):
 
         options = webdriver.ChromeOptions()
         options.binary_location = chrome_bin
-        options.add_argument('—-disable-gpu')
         options.add_argument('—-no-sandbox')
         options.add_argument('—-headless')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-infobars')
+        options.add_argument('--disable-extensions')
+        options.add_argument('—-disable-gpu')
 
         #DRIVER = 'chromedriver'
         #driver = webdriver.Chrome(DRIVER)
