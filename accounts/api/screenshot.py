@@ -1,10 +1,8 @@
 from selenium import webdriver
 import base64
-from urllib.parse import urlparse
 import cloudinary
 from cloudinary import uploader
 import re
-import os
 import requests
 
 
