@@ -4,6 +4,7 @@ from urllib.parse import urlparse
 import cloudinary
 from cloudinary import uploader
 import re
+import os
 
 
 def get_screenshot(url):
@@ -22,18 +23,20 @@ def get_screenshot(url):
         else:
             isUrl = 'http://' + url
 
-        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
         CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument('--disable-gpu')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.binary_location = GOOGLE_CHROME_PATH
+        chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', 'chromedriver')
+
+        options = webdriver.ChromeOptions()
+        options.binary_location = chrome_bin
+        options.add_argument('—-disable-gpu')
+        options.add_argument('—-no-sandbox')
+        options.add_argument('—-headless')
 
         #DRIVER = 'chromedriver'
         #driver = webdriver.Chrome(DRIVER)
         driver = webdriver.Chrome(
-            executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+            executable_path=CHROMEDRIVER_PATH, chrome_options=options)
         driver.get(isUrl)
         screenshot_img = driver.get_screenshot_as_png()
         # screenshot = base64.encodestring(screenshot_img)
