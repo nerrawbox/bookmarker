@@ -23,12 +23,11 @@ def get_screenshot(url):
         else:
             isUrl = 'http://' + url
 
+        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
         CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 
-        chrome_bin = os.environ.get('GOOGLE_CHROME_BIN', 'chromedriver')
-
         options = webdriver.ChromeOptions()
-        options.binary_location = chrome_bin
+        options.binary_location = GOOGLE_CHROME_PATH
         options.add_argument('—-disable-gpu')
         options.add_argument('—-no-sandbox')
         options.add_argument('—-headless')
@@ -46,5 +45,6 @@ def get_screenshot(url):
             return result_cloudinary['url']
         else:
             return ''
-    except Exception:
+    except Exception as e:
+        print(e)
         return ''
