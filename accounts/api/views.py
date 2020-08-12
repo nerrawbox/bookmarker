@@ -1,6 +1,6 @@
 from rest_framework import viewsets, status
 from .serializers import BookmarkSerializer
-from .screenshot import get_screenshot
+from .screenshot import get_screenshot_image
 from accounts.models import Bookmark
 from rest_framework.response import Response
 import cloudinary
@@ -14,7 +14,7 @@ class BookmarkViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         data = json.loads(request.body)
-        screenshot_url = get_screenshot(data.get('url'))
+        screenshot_url = get_screenshot_image(data.get('url'))
         if screenshot_url != '':
             request.data['image'] = screenshot_url
 
