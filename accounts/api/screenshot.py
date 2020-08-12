@@ -33,7 +33,7 @@ def get_screenshot(url):
         #DRIVER = 'chromedriver'
         #driver = webdriver.Chrome(DRIVER)
         driver = webdriver.Chrome(
-            execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+            executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
         driver.get(isUrl)
         screenshot_img = driver.get_screenshot_as_png()
         # screenshot = base64.encodestring(screenshot_img)
