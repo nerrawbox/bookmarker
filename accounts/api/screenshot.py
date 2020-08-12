@@ -22,8 +22,18 @@ def get_screenshot(url):
         else:
             isUrl = 'http://' + url
 
-        DRIVER = 'chromedriver'
-        driver = webdriver.Chrome(DRIVER)
+        GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+        CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+        #DRIVER = 'chromedriver'
+        #driver = webdriver.Chrome(DRIVER)
+        driver = webdriver.Chrome(
+            execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
         driver.get(isUrl)
         screenshot_img = driver.get_screenshot_as_png()
         # screenshot = base64.encodestring(screenshot_img)
