@@ -38,7 +38,7 @@ def get_screenshot(url):
         options.add_argument('--disable-extensions')
         options.add_argument('--remote-debugging-port=9222')
         options.add_argument('—-disable-gpu')
-        options.add_argument('window-size=1200x600')
+        options.add_argument('window-size=1024x768')
 
         #DRIVER = 'chromedriver'
         #driver = webdriver.Chrome(DRIVER)
