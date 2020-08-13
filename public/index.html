@@ -42,23 +42,25 @@
         $(this).html('<input class="form-control m-auto" type="text" placeholder="Search ' + title + '" />');
       }
     });
+    setTimeout(function () {
+      var table = $('#bookmarks').DataTable({
+        initComplete: function () {
+          // Apply the search
+          this.api().columns().every(function () {
+            var that = this;
 
-    var table = $('#bookmarks').DataTable({
-      initComplete: function () {
-        // Apply the search
-        this.api().columns().every(function () {
-          var that = this;
-
-          $('input', this.footer()).on('keyup change clear', function () {
-            if (that.search() !== this.value) {
-              that
-                .search(this.value)
-                .draw();
-            }
+            $('input', this.footer()).on('keyup change clear', function () {
+              if (that.search() !== this.value) {
+                that
+                  .search(this.value)
+                  .draw();
+              }
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    }, 1000);
+
   });
 
 </script>
