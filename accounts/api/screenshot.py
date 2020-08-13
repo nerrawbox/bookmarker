@@ -7,7 +7,11 @@ import requests
 
 
 def get_screenshot_image(url):
+    # Use this to process Screenshot form a different API
     return get_screenshot_from_api(url)
+    # Use this to process Screenshot using this backend
+    # Make sure you have chromedriver installed
+    # return get_screenshot_from_backend(url)
 
 
 def get_screenshot_from_api(url):
