@@ -122,20 +122,6 @@ export default class Table extends Component {
 
                                             : null
                                         }
-                                        <tr>
-                                            <td>
-
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                            <td>
-
-                                            </td>
-                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>

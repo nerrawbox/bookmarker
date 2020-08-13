@@ -36,13 +36,14 @@
 <script type="text/javascript">
   $(document).ready(function () {
     // $('#bookmarks').DataTable();
-    $('#bookmarks tfoot th').each(function () {
-      var title = $(this).text();
-      if (title == 'Tags' || title == 'URL') {
-        $(this).html('<input class="form-control m-auto" type="text" placeholder="Search ' + title + '" />');
-      }
-    });
+
     setTimeout(function () {
+      $('#bookmarks tfoot th').each(function () {
+        var title = $(this).text();
+        if (title == 'Tags' || title == 'URL') {
+          $(this).html('<input class="form-control m-auto" type="text" placeholder="Search ' + title + '" />');
+        }
+      });
       var table = $('#bookmarks').DataTable({
         initComplete: function () {
           // Apply the search
