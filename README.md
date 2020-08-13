@@ -4,9 +4,9 @@ Run the following commands to get started:
 virtualenv env
 
 *Activate env 
-*(Windows)
-env\Scripts\activate
-*(Mac, etc)
+*(Windows, bash)
+source env/Scripts/activate
+*(Mac, bash, etc)
 source env/bin/activate
 
 pip install -r requirements.txt
