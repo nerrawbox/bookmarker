@@ -41,7 +41,7 @@ def get_screenshot_from_backend(url):
         driver.quit()
         if screenshot_img != '':
             result_cloudinary = cloudinary.uploader.upload(screenshot_img)
-            return result_cloudinary['url']
+            return result_cloudinary['secure_url']
         else:
             return ''
     except Exception as e:

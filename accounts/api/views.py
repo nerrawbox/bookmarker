@@ -37,10 +37,9 @@ class BookmarkViewSet(viewsets.ModelViewSet):
         isScreenShot = str(a) != str(b)
 
         if isScreenShot:
-            screenshot_img = get_screenshot(data.get('url'))
-            if screenshot_img != '':
-                result_cloudinary = cloudinary.uploader.upload(screenshot_img)
-                request.data['image'] = result_cloudinary['url']
+            screenshot_url = get_screenshot_image(data.get('url'))
+            if screenshot_url != '':
+                request.data['image'] = screenshot_url
 
         if serializer.is_valid():
             self.perform_update(serializer)
