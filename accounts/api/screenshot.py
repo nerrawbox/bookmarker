@@ -18,7 +18,7 @@ def get_screenshot_from_api(url):
         result = screenshot_img.content
         if result != '':
             result_cloudinary = cloudinary.uploader.upload(result)
-            return result_cloudinary['url']
+            return result_cloudinary['secure_url']
         else:
             return ''
     except Exception as e:
