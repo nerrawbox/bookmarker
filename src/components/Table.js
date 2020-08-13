@@ -7,7 +7,9 @@ export default class Table extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            bookmarks: [],
+            bookmarks: [
+
+            ],
             bookmark: null
         }
     }
@@ -120,6 +122,20 @@ export default class Table extends Component {
 
                                             : null
                                         }
+                                        <tr>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+
+                                            </td>
+                                        </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
